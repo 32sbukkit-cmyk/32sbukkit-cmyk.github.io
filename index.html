@@ -1,37 +1,169 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Great Lakes Investigation</title>
+<meta charset="UTF-8">
+<title>Great Lakes Investigation – Advanced Case File</title>
+
+<!-- GOOGLE FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
 <style>
-body { font-family: sans-serif; background-color: #f4f4f4; margin: 40px; line-height: 1.6; }
-.case-file { background: white; padding: 30px; border: 2px solid #333; max-width: 800px; margin: auto; }
-h1 { text-align: center; text-transform: uppercase; border-bottom: 3px solid red; }
-.status { color: #213F65; font-weight: bold; text-align: center; font-size: 1.2em; }
-.section { margin-top: 25px; border: 1px solid #ddd; padding: 15px; }
-h2 { color: #2c3e50; border-bottom: 1px solid #ccc; }
-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
-th { background-color: #f8f8f8; }
-.conclusion { background: #fffde7; padding: 15px; border-left: 5px solid #ffd600; font-style: italic; }
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to bottom, #d9e6f2, #f4f4f4);
+    margin: 0;
+    padding: 40px;
+}
+
+/* CASE FILE CONTAINER */
+.case-file {
+    background: white;
+    padding: 30px;
+    border: 3px solid #1b2a41;
+    max-width: 900px;
+    margin: auto;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    animation: fadeIn 1.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    border-bottom: 4px solid red;
+    padding-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.status {
+    color: #213F65;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.3em;
+    margin-bottom: 20px;
+}
+
+/* SECTIONS */
+.section {
+    margin-top: 30px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 6px;
+    background: #fafafa;
+}
+
+h2 {
+    color: #1b2a41;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 5px;
+    font-family: 'Oswald', sans-serif;
+}
+
+/* IMAGES */
+.suspect-img {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 6px;
+    margin: 10px 0;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    transition: transform .3s;
+}
+.suspect-img:hover {
+    transform: scale(1.05);
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+th, td {
+    border: 1px solid #bbb;
+    padding: 12px;
+}
+th {
+    background: #e8e8e8;
+    font-weight: bold;
+}
+
+/* CONCLUSION BOX */
+.conclusion {
+    background: #fffde7;
+    padding: 20px;
+    border-left: 6px solid #ffd600;
+    font-style: italic;
+    font-size: 1.1em;
+}
+
+/* GAME BUTTONS */
+button {
+    padding: 10px 20px;
+    background: #213F65;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+    font-size: 1em;
+}
+button:hover {
+    background: #162c4a;
+}
+
+/* ZEBRA MUSSEL GAME */
+#mussel-area {
+    width: 100%;
+    height: 200px;
+    background: #d0e7ff;
+    border: 2px solid #1b2a41;
+    margin-top: 15px;
+    position: relative;
+    overflow: hidden;
+}
+.mussel {
+    width: 60px;
+    position: absolute;
+    cursor: pointer;
+    transition: transform .2s;
+}
+.mussel:hover {
+    transform: scale(1.2);
+}
 </style>
 </head>
+
 <body>
 
 <div class="case-file">
+
 <h1>Case Report: Great Lakes Crime Scene</h1>
 <p class="status">CASE STATUS: ACTIVE / CLASSIFIED</p>
 
+<!-- SUSPECTS -->
 <div class="section">
 <h2>The Suspects</h2>
+
 <ul>
-<li><strong>Suspect 1: Sewage (Pollution)</strong> - Responsible for carrying germs and extra nutrients into the water.
-</li> <img src="https://www.imperial.ac.uk/news/242831/sewage-overspills-result-from-lack-infrastructure/" alt="SUSPECT 1: SEWAGE">
-<li><strong>Suspect 2: Zebra Mussels (Invasive Species)</strong> - Small shellfish that multiply quickly and steal food from local fish.</li>
-  <img src="https://www.invasivespeciesinfo.gov/aquatic/invertebrates/zebra-mussel " alt="SUSPECT 2: ZEBRA MUSSELS">
-  <img src="https://greatlakesecho.org/2014/03/06/invasive-species-zebra-mussels/" alt="ZEBRA MUSSEL MUGSHOT">
+<li><strong>Suspect 1: Sewage (Pollution)</strong> – Carries germs and extra nutrients into the water.</li>
+<img class="suspect-img" src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Sewage_discharge_pipe.jpg" alt="Sewage Pollution">
+
+<li><strong>Suspect 2: Zebra Mussels (Invasive Species)</strong> – Multiply quickly and steal food from local fish.</li>
+<img class="suspect-img" src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Zebra_mussel_02.jpg" alt="Zebra Mussels">
+<img class="suspect-img" src="https://upload.wikimedia.org/wikipedia/commons/6/6d/Zebra_mussels_on_shoe.jpg" alt="Zebra Mussel Infestation">
 </ul>
+
+<!-- MINI GAME 1 -->
+<button onclick="revealSuspect()">Reveal the Most Dangerous Suspect</button>
+<p id="suspectReveal" style="font-weight:bold; margin-top:10px;"></p>
 </div>
 
+<!-- EVIDENCE -->
 <div class="section">
 <h2>Evidence of the Crime</h2>
 <ul>
@@ -44,6 +176,7 @@ th { background-color: #f8f8f8; }
 </ul>
 </div>
 
+<!-- INTERVENTIONS -->
 <div class="section">
 <h2>Intervention Rankings</h2>
 <table>
@@ -70,6 +203,7 @@ th { background-color: #f8f8f8; }
 </table>
 </div>
 
+<!-- CONCLUSION -->
 <div class="section">
 <h2>Investigator's Conclusion</h2>
 <div class="conclusion">
@@ -77,10 +211,52 @@ th { background-color: #f8f8f8; }
 </div>
 </div>
 
-<p style="text-align: center; font-size: 0.8em; color: #888;">Source: epa.gov/greatlakes (Reliability: 10/10)</p>
+<!-- MINI GAME 2: ZEBRA MUSSEL CONTAINMENT -->
+<div class="section">
+<h2>Mini‑Game: Contain the Zebra Mussels!</h2>
+<p>Click the mussels before they spread!</p>
+<div id="mussel-area"></div>
+<button onclick="spawnMussels()">Start Game</button>
+<p id="score" style="font-weight:bold; margin-top:10px;">Score: 0</p>
 </div>
+
+<p style="text-align:center; font-size:0.8em; color:#666;">Source: epa.gov/greatlakes (Reliability: 10/10)</p>
+
+</div>
+
+<!-- JAVASCRIPT FOR GAMES -->
+<script>
+// GAME 1: SUSPECT REVEAL
+function revealSuspect() {
+    document.getElementById("suspectReveal").innerHTML =
+        "⚠️ Most Dangerous Suspect: Zebra Mussels – because they spread uncontrollably!";
+}
+
+// GAME 2: ZEBRA MUSSEL CLICK GAME
+let score = 0;
+
+function spawnMussels() {
+    const area = document.getElementById("mussel-area");
+    area.innerHTML = ""; // clear old mussels
+
+    for (let i = 0; i < 5; i++) {
+        let mussel = document.createElement("img");
+        mussel.src = "https://upload.wikimedia.org/wikipedia/commons/5/5c/Zebra_mussel_02.jpg";
+        mussel.classList.add("mussel");
+
+        mussel.style.top = Math.random() * 140 + "px";
+        mussel.style.left = Math.random() * 600 + "px";
+
+        mussel.onclick = function() {
+            score++;
+            document.getElementById("score").innerHTML = "Score: " + score;
+            mussel.remove();
+        };
+
+        area.appendChild(mussel);
+    }
+}
+</script>
 
 </body>
 </html>
-
-
