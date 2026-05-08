@@ -8,6 +8,28 @@
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
+/* PAGE INTRO ANIMATION */
+#intro-screen {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.5em;
+    letter-spacing: 3px;
+    z-index: 9999;
+    animation: fadeOut 3s forwards;
+    animation-delay: 2.5s;
+}
+
+@keyframes fadeOut {
+    to { opacity: 0; visibility: hidden; }
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     background: linear-gradient(to bottom, #d9e6f2, #f4f4f4);
@@ -101,7 +123,7 @@ th {
     font-size: 1.1em;
 }
 
-/* GAME BUTTONS */
+/* BUTTONS */
 button {
     padding: 10px 20px;
     background: #213F65;
@@ -119,7 +141,7 @@ button:hover {
 /* ZEBRA MUSSEL GAME */
 #mussel-area {
     width: 100%;
-    height: 200px;
+    height: 250px;
     background: #d0e7ff;
     border: 2px solid #1b2a41;
     margin-top: 15px;
@@ -135,10 +157,19 @@ button:hover {
 .mussel:hover {
     transform: scale(1.2);
 }
+
+.timer {
+    font-weight: bold;
+    color: red;
+    margin-top: 10px;
+}
 </style>
 </head>
 
 <body>
+
+<!-- INTRO SCREEN -->
+<div id="intro-screen">INITIALIZING CASE FILE...</div>
 
 <div class="case-file">
 
@@ -151,14 +182,13 @@ button:hover {
 
 <ul>
 <li><strong>Suspect 1: Sewage (Pollution)</strong> – Carries germs and extra nutrients into the water.</li>
-<img class="suspect-img" src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Sewage_discharge_pipe.jpg" alt="Sewage Pollution">
+<img class="suspect-img" src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Sewage_discharge_pipe.jpg">
 
 <li><strong>Suspect 2: Zebra Mussels (Invasive Species)</strong> – Multiply quickly and steal food from local fish.</li>
-<img class="suspect-img" src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Zebra_mussel_02.jpg" alt="Zebra Mussels">
-<img class="suspect-img" src="https://upload.wikimedia.org/wikipedia/commons/6/6d/Zebra_mussels_on_shoe.jpg" alt="Zebra Mussel Infestation">
+<img class="suspect-img" src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Zebra_mussel_02.jpg">
+<img class="suspect-img" src="https://upload.wikimedia.org/wikipedia/commons/6/6d/Zebra_mussels_on_shoe.jpg">
 </ul>
 
-<!-- MINI GAME 1 -->
 <button onclick="revealSuspect()">Reveal the Most Dangerous Suspect</button>
 <p id="suspectReveal" style="font-weight:bold; margin-top:10px;"></p>
 </div>
@@ -214,13 +244,26 @@ button:hover {
 <!-- MINI GAME 2: ZEBRA MUSSEL CONTAINMENT -->
 <div class="section">
 <h2>Mini‑Game: Contain the Zebra Mussels!</h2>
-<p>Click the mussels before they spread!</p>
+<p>Click the mussels before the timer runs out!</p>
+
+<div class="timer" id="timer">Time Left: 15</div>
+
 <div id="mussel-area"></div>
-<button onclick="spawnMussels()">Start Game</button>
+
+<button onclick="startGame()">Start Game</button>
+
 <p id="score" style="font-weight:bold; margin-top:10px;">Score: 0</p>
 </div>
 
-<p style="text-align:center; font-size:0.8em; color:#666;">Source: epa.gov/greatlakes (Reliability: 10/10)</p>
+<!-- SOURCE -->
+<p style="text-align:center; font-size:0.9em; color:#333;">
+Source:  
+<a href="https://www.epa.gov/greatlakes" target="_blank">https://www.epa.gov/greatlakes</a>  
+<br>
+<strong>Why this source is trustworthy:</strong>  
+The EPA (Environmental Protection Agency) is a U.S. government organization responsible for protecting the environment.  
+It provides verified scientific data, expert-reviewed reports, and accurate information about water quality and invasive species.
+</p>
 
 </div>
 
@@ -229,23 +272,46 @@ button:hover {
 // GAME 1: SUSPECT REVEAL
 function revealSuspect() {
     document.getElementById("suspectReveal").innerHTML =
-        "⚠️ Most Dangerous Suspect: Zebra Mussels – because they spread uncontrollably!";
+        "⚠️ Most Dangerous Suspect: Zebra Mussels – they spread uncontrollably and damage ecosystems!";
 }
 
-// GAME 2: ZEBRA MUSSEL CLICK GAME
+// GAME 2: ZEBRA MUSSEL CLICK GAME WITH TIMER
 let score = 0;
+let timeLeft = 15;
+let timerInterval;
+
+function startGame() {
+    score = 0;
+    timeLeft = 15;
+    document.getElementById("score").innerHTML = "Score: 0";
+    document.getElementById("timer").innerHTML = "Time Left: 15";
+
+    spawnMussels();
+
+    clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        document.getElementById("timer").innerHTML = "Time Left: " + timeLeft;
+
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            alert("Time's up! Final Score: " + score);
+            document.getElementById("mussel-area").innerHTML = "";
+        }
+    }, 1000);
+}
 
 function spawnMussels() {
     const area = document.getElementById("mussel-area");
-    area.innerHTML = ""; // clear old mussels
+    area.innerHTML = "";
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 7; i++) {
         let mussel = document.createElement("img");
         mussel.src = "https://upload.wikimedia.org/wikipedia/commons/5/5c/Zebra_mussel_02.jpg";
         mussel.classList.add("mussel");
 
-        mussel.style.top = Math.random() * 140 + "px";
-        mussel.style.left = Math.random() * 600 + "px";
+        mussel.style.top = Math.random() * 180 + "px";
+        mussel.style.left = Math.random() * 700 + "px";
 
         mussel.onclick = function() {
             score++;
